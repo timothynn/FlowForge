@@ -2,10 +2,10 @@ import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Plus, Folder } from 'lucide-react';
+import { Folder } from 'lucide-react';
 import Link from 'next/link';
+import { CreateWorkspaceDialog } from '@/components/workspace/create-workspace-dialog';
 
 export default async function WorkspacesPage() {
   const session = await getServerSession(authOptions);
@@ -48,10 +48,7 @@ export default async function WorkspacesPage() {
             Manage your workspaces and collaborate with your team
           </p>
         </div>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          New Workspace
-        </Button>
+        <CreateWorkspaceDialog />
       </div>
 
       {workspaces.length === 0 ? (
@@ -62,10 +59,7 @@ export default async function WorkspacesPage() {
             <p className="text-muted-foreground text-center mb-6">
               Create your first workspace to get started with FlowForge
             </p>
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Create Workspace
-            </Button>
+            <CreateWorkspaceDialog />
           </CardContent>
         </Card>
       ) : (
